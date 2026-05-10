@@ -29,3 +29,6 @@ Thumbs.db
 # Cache
 .cache/
 *.tsbuildinfo
+
+# Sisyphus working files
+.sisyphus/
