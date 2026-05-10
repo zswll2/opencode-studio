@@ -52,15 +52,15 @@ function listProfiles() {
 
 function createProfile(name) {
     const dir = path.join(PROFILES_DIR, name);
-    if (fs.existsSync(dir)) throw new Error('Profile already exists');
+    if (fs.existsSync(dir)) throw Object.assign(new Error('Profile already exists'), { code: 'PROFILE_EXISTS' });
     fs.mkdirSync(dir, { recursive: true });
     return { success: true };
 }
 
 function deleteProfile(name) {
     const { active } = listProfiles();
-    if (name === active) throw new Error('Cannot delete active profile');
-    if (name === 'default') throw new Error('Cannot delete default profile');
+    if (name === active) throw Object.assign(new Error('Cannot delete active profile'), { code: 'CANNOT_DELETE_ACTIVE' });
+    if (name === 'default') throw Object.assign(new Error('Cannot delete default profile'), { code: 'CANNOT_DELETE_DEFAULT' });
     
     const dir = path.join(PROFILES_DIR, name);
     if (fs.existsSync(dir)) {
@@ -71,7 +71,7 @@ function deleteProfile(name) {
 
 function activateProfile(name) {
     const target = path.join(PROFILES_DIR, name);
-    if (!fs.existsSync(target)) throw new Error('Profile not found');
+    if (!fs.existsSync(target)) throw Object.assign(new Error('Profile not found'), { code: 'PROFILE_NOT_FOUND' });
     
     if (fs.existsSync(OPENCODE_DIR)) {
         fs.rmSync(OPENCODE_DIR, { recursive: true, force: true });
