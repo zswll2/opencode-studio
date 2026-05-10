@@ -1331,6 +1331,7 @@ const aggregateAgents = () => {
     const roots = getSearchRoots();
     
     for (const root of roots) {
+        // Read from opencode.json (agent field - singular)
         const configPath = path.join(root, 'opencode.json');
         if (fs.existsSync(configPath)) {
             try {
@@ -1350,6 +1351,29 @@ const aggregateAgents = () => {
                 }
             } catch (err) {
                 console.error(`Failed to read agent config from ${configPath}:`, err.message);
+            }
+        }
+        
+        // Read from oh-my-openagent.json (agents field - plural)
+        const omoConfigPath = path.join(root, 'oh-my-openagent.json');
+        if (fs.existsSync(omoConfigPath)) {
+            try {
+                const content = JSON.parse(fs.readFileSync(omoConfigPath, 'utf8'));
+                const configAgents = content.agents || {};
+                for (const [name, agentConfig] of Object.entries(configAgents)) {
+                    if (!agentMap.has(name)) {
+                        agentMap.set(name, {
+                            name,
+                            source: 'json-config',
+                            configPath: root,
+                            ...agentConfig,
+                            permission: agentConfig.permission || agentConfig.permissions,
+                            permissions: agentConfig.permission || agentConfig.permissions
+                        });
+                    }
+                }
+            } catch (err) {
+                console.error(`Failed to read agent config from ${omoConfigPath}:`, err.message);
             }
         }
     }
