@@ -90,6 +90,9 @@ app.use((req, res, next) => {
 });
 
 const ALLOWED_ORIGINS = [
+        'http://192.168.10.100:1080',
+    /^http:\/\/192\.168\..+:108\d$/,
+    /^http:\/\/192\.168\.10\.\d{1,3}:108\d$/,
     'http://localhost:1080',
     'http://127.0.0.1:1080',
     /^http:\/\/localhost:108\d$/,
@@ -558,8 +561,11 @@ const getPaths = () => {
     const home = os.homedir();
     let candidates = [
         path.join(home, '.config', 'opencode', 'opencode.json'),
+        path.join(home, '.config', 'opencode', 'opencode.jsonc'),
         path.join(home, '.local', 'share', 'opencode', 'opencode.json'),
+        path.join(home, '.local', 'share', 'opencode', 'opencode.jsonc'),
         path.join(home, '.opencode', 'opencode.json'),
+        path.join(home, '.opencode', 'opencode.jsonc'),
     ];
     if (platform === 'win32') {
         candidates.push(path.join(process.env.APPDATA, 'opencode', 'opencode.json'));
@@ -576,9 +582,12 @@ const getPaths = () => {
     let manualPath = studioConfig.configPath;
 
     if (manualPath && fs.existsSync(manualPath) && fs.statSync(manualPath).isDirectory()) {
-        const potentialFile = path.join(manualPath, 'opencode.json');
-        if (fs.existsSync(potentialFile)) {
-            manualPath = potentialFile;
+        const potentialJson = path.join(manualPath, 'opencode.json');
+        const potentialJsonc = path.join(manualPath, 'opencode.jsonc');
+        if (fs.existsSync(potentialJson)) {
+            manualPath = potentialJson;
+        } else if (fs.existsSync(potentialJsonc)) {
+            manualPath = potentialJsonc;
         }
     }
 
@@ -601,7 +610,12 @@ const getPaths = () => {
 const getOhMyOpenCodeConfigPath = () => {
     const cp = getConfigPath();
     if (!cp) return null;
-    return path.join(path.dirname(cp), 'oh-my-opencode.json');
+    const dir = path.dirname(cp);
+    const newPath = path.join(dir, 'oh-my-openagent.json');
+    const oldPath = path.join(dir, 'oh-my-opencode.json');
+    if (fs.existsSync(newPath)) return newPath;
+    if (fs.existsSync(oldPath)) return oldPath;
+    return newPath;
 };
 
 const getConfigPath = () => getPaths().current;
