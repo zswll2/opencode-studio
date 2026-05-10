@@ -32,3 +32,6 @@ Thumbs.db
 
 # Sisyphus working files
 .sisyphus/
+
+# Changeset (version management - optional)
+.changeset/
