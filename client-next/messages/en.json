@@ -82,9 +82,9 @@
       "noPresetsYet": "No presets yet",
       "noPresetsHint": "Configure your environment (enable skills, plugins, etc.) then click \"New Preset\" below.",
       "delete": "Delete",
-      "skillsCount": "• {count} skills",
-      "pluginsCount": "• {count} plugins",
-      "mcpsCount": "• {count} MCPs",
+      "skillsCount": "\u2022 {count} skills",
+      "pluginsCount": "\u2022 {count} plugins",
+      "mcpsCount": "\u2022 {count} MCPs",
       "exclusiveTitle": "Enables these items and DISABLES all others",
       "exclusive": "Exclusive",
       "additiveTitle": "Enables these items (keeps others active)",
@@ -434,7 +434,8 @@
     "noSkills": "No skills found.",
     "noMatch": "No skills match \"{search}\"",
     "unknownError": "Unknown error",
-    "delete": "Delete"
+    "delete": "Delete",
+    "cancel": "Cancel"
   },
   "plugins": {
     "incompatibleWarning": "Incompatible with Antigravity. Use openskills instead.",
@@ -450,7 +451,8 @@
     "noPlugins": "No plugins found.",
     "noMatch": "No plugins match \"{search}\"",
     "unknownError": "Unknown error",
-    "delete": "Delete"
+    "delete": "Delete",
+    "cancel": "Cancel"
   },
   "commands": {
     "loadFailed": "Failed to load commands",
@@ -594,7 +596,13 @@
     "notFound": "Not Found",
     "save": "Save",
     "templates": "Templates",
-    "insert": "Insert"
+    "insert": "Insert",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "templateNextjsName": "Next.js Project",
+    "templateNextjsDesc": "Rules for Next.js App Router projects",
+    "templatePythonName": "Python Script",
+    "templatePythonDesc": "Rules for Python projects"
   },
   "usage": {
     "selectBothDates": "Select both start and end dates.",
@@ -728,7 +736,7 @@
       "whatIsThis": "What is this?",
       "howToUse": "How to use",
       "tips": "Tips",
-      "viewDocs": "View documentation on GitHub →"
+      "viewDocs": "View documentation on GitHub \u2192"
     },
     "noContent": "No help content available.",
     "agents": {
@@ -1002,11 +1010,11 @@
       "stopServer": "Stop Server",
       "serverStopped": "Server stopped. Run update, then restart.",
       "checkAgain": "Check Again",
-      "stepsHint": "Stop server → run update → restart server → check again"
+      "stepsHint": "Stop server \u2192 run update \u2192 restart server \u2192 check again"
     }
   },
   "appShell": {
-    "crimeTape": "WORK IN PROGRESS • REPORT ISSUES ON GITHUB • WORK IN PROGRESS • REPORT ISSUES ON GITHUB • ",
+    "crimeTape": "WORK IN PROGRESS \u2022 REPORT ISSUES ON GITHUB \u2022 WORK IN PROGRESS \u2022 REPORT ISSUES ON GITHUB \u2022 ",
     "landing": {
       "subtitle": "Manage your OpenCode configuration with a visual interface",
       "launchBackend": "Launch Backend",
